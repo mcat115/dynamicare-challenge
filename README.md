@@ -13,7 +13,7 @@ To create locally:
 - `yarn install`
 - Then open the project and add a .env file to the root directory, and add an API key for OpenWeatherMap with a line like so
   `OPEN_WEATHER_API_KEY = your_key_here`
-- Do the same thing on the next line for an API key to access Google maps like so `GOOGLE_CLOUD_MAP_API_KEY = your_key_here`
+- Do the same thing on the next line for an API key to access Google Maps like so `GOOGLE_CLOUD_MAP_API_KEY = your_key_here`
 - Then in two seperate terminal windows, both open in the directory run `yarn start` in one and `ruby server.rb` in another.
 - Finally in Chrome go to localhost:4567 and the project should be running there! (If the API keys were added incorrectly the app will be a blank white page)
 
