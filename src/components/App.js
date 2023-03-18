@@ -14,10 +14,17 @@ const App = (props) => {
       const response = await fetch(`api/v1/forecast?zip=${zip}`)
       if (!response.ok) {
         const errorMessage = `${response.status} (${response.statusText})`
-        const error = new Error(errorMessage)
-        throw error
+        throw new Error(errorMessage)
       }
       const weatherForecast = await response.json()
+      if ("message" in weatherForecast) {
+        if (
+          weatherForecast.message ===
+          "Invalid API key. Please see https://openweathermap.org/faq#error401 for more info."
+        ) {
+          throw new Error(weatherForecast.message)
+        }
+      }
       setCurrentForecast(weatherForecast)
     } catch (err) {
       console.error(`Error in fetch: ${err.message}`)
@@ -29,8 +36,7 @@ const App = (props) => {
       const response = await fetch(`api/v1/map?zip=${zip}`)
       if (!response.ok) {
         const errorMessage = `${response.status} (${response.statusText})`
-        const error = new Error(errorMessage)
-        throw error
+        throw new Error(errorMessage)
       }
       const map = await response.blob()
       let img = URL.createObjectURL(map)
@@ -45,8 +51,7 @@ const App = (props) => {
       const response = await fetch("/past_searches")
       if (!response.ok) {
         const errorMessage = `${response.status} (${response.statusText})`
-        const error = new Error(errorMessage)
-        throw error
+        throw new Error(errorMessage)
       }
       let searches = await response.json()
       let output = searches.map((zip) => {
