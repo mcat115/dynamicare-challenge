@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 
-const form = (props) => {
+const Form = (props) => {
   const [formZip, setFormZip] = useState("")
 
   const handleInput = (event) => {
@@ -24,4 +24,4 @@ const form = (props) => {
   )
 }
 
-export default form
+export default Form
