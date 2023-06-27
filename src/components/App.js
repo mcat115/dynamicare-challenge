@@ -100,8 +100,6 @@ const App = (props) => {
     return (temp - 273.15) * (9 / 5) + 31
   }
 
-  let isLocationFound = currentForecast.message !== "city not found"
-
   return (
     <div>
       <h1>Welcome to the USA weather map machine!</h1>
@@ -116,7 +114,7 @@ const App = (props) => {
         fetchMap={fetchMap}
       />
 
-      {isLocationFound && (
+      {currentForecast.message !== "city not found" ? (
         <>
           <h2>{currentForecast.name} Weather</h2>
           <p>Temperature: {convertKToF(currentForecast.main.temp).toFixed(2)} degrees Farenheit</p>
@@ -125,9 +123,7 @@ const App = (props) => {
           <p>Humidity: {currentForecast.main.humidity}%</p>
           <p>Wind Speed: {currentForecast.wind.speed} mph</p>
         </>
-      )}
-
-      {!isLocationFound && (
+      ) : (
         <>
           <h2>We're sorry, we couldn't find any weather data!</h2>
           <p>
